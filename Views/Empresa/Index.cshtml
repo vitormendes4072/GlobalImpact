@@ -1,0 +1,62 @@
+﻿@model IList<Empresa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Empresas</h1>
+<mensagem texto="@TempData["msg"]"></mensagem>
+<form class="form-inline mb-3">
+    <input type="text" name="nomeBusca" placeholder="Digite o nome" class="form-control mr-1" />
+    <input type="submit" value="Pesquisar" class="btn btn-success" />
+</form>
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Cnpj</th>
+        <th>Logradouro</th>
+        <th>CEP</th>
+        <th>Cidade</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Cnpj</td>
+            <td>@item.Endereco.Logradouro</td>
+            <td>@item.Endereco.Cep</td>
+            <td>@item.Endereco.Cidade</td>
+            <td>
+                <a asp-action="editar" asp-route-id="@item.EmpresaId" class="btn btn-sm btn-primary">Editar</a>
+                <button onclick="idEmpresa.value = @item.EmpresaId" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Excluir
+                </button>
+                <a asp-action="detalhar" asp-route-id="@item.EmpresaId" class="btn btn-secondary btn-sm">Alimentos</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="cadastrar" class="btn btn-primary">Cadastrar</a>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir a empresa?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="remover">
+                    <input type="hidden" name="id" id="idEmpresa" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

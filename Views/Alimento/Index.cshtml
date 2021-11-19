@@ -1,0 +1,22 @@
+﻿@model EmpresaViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alimentos</h1>
+<mensagem texto="@TempData["msg"]"></mensagem>
+<form class="form-inline mb-3">
+    <input type="text" name="nomeBusca" placeholder="Digite o nome" class="form-control mr-1" />
+    <input type="submit" value="Pesquisar" class="btn btn-success" />
+</form>
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Cnpj</th>
+        <th>Logradouro</th>
+        <th>CEP</th>
+        <th>Cidade</th>
+        <th></th>
+    </tr>
+</table>
